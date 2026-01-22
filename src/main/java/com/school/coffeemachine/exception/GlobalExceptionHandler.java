@@ -47,4 +47,10 @@ public class GlobalExceptionHandler {
         ApiError body = new ApiError(409, "INSUFFICIENT_INVENTORY", ex.getMessage(), req.getRequestURI(), null);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
+
+    @ExceptionHandler(InsufficientPaymentException.class)
+    public ResponseEntity<ApiError> handleInsufficientPayment(InsufficientPaymentException ex, HttpServletRequest req) {
+        ApiError body = new ApiError(409, "INSUFFICIENT_PAYMENT", ex.getMessage(), req.getRequestURI(), null);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+    }
 }

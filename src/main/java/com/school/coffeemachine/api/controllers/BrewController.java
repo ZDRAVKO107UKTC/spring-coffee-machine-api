@@ -6,6 +6,8 @@ import com.school.coffeemachine.service.BrewService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/api")
 public class BrewController {
@@ -17,7 +19,7 @@ public class BrewController {
 
     @PostMapping("/brew")
     public BrewResponse brew(@Valid @RequestBody BrewRequest req) {
-        brewService.brew(req.getRecipeId());
-        return new BrewResponse("SUCCESS", "Coffee brewed successfully.");
+        BigDecimal changeEur = brewService.brew(req.getRecipeId(), req.getPaymentAmount(), req.getPaymentCurrency());
+        return new BrewResponse("SUCCESS", "Coffee brewed successfully.", changeEur);
     }
 }
